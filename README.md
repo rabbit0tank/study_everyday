@@ -13,7 +13,7 @@
   - 悬垂指针   DanglingReferenceExample
     已经被释放或不再有效的内存区域的指针，再次访问它会导致未定义的行为。
   - 错误释放
-    - 双重释放（Double Free）：同一块内存被释放两次。这种情况可能导致程序崩溃或未定义的行为。\
+    - 双重释放（Double Free）：同一块内存被释放两次。这种情况可能导致程序崩溃或未定义的行为。
     ```c
       int* ptr = (int*)malloc(sizeof(int));
       free(ptr);

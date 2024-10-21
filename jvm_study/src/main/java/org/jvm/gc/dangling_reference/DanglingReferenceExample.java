@@ -70,13 +70,14 @@ public class DanglingReferenceExample {
         }
 
 //        如果没有取消该引用，会被GC认为是对MyObject仍然有的强引用，造成悬垂引用
+        System.out.println("Before gc weakRef value: " + weakRef.get().getValue());
+        System.out.println("Before gc Object value: " + obj);
         retrievedObj=null;
-        System.out.println("Before gc Object value: " + weakRef.get().getValue());
+        System.out.println("Before gc weakRef value: " + weakRef.get().getValue());
 
         // 给系统提供建议触发垃圾回收
 
         // 可能返回 null
-
         /*
             没有回收的原因：
             1. JVM 行为：垃圾回收是非确定性的。即使调用了 System.gc()，也不一定会立即回收没有强引用的对象。JVM 可能出于性能优化或内存管理的考虑，选择不进行回收。
