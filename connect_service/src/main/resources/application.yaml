@@ -1,0 +1,29 @@
+spring:
+  application:
+    name: lyoral-distribution
+
+  datasource:
+    url: jdbc:postgresql://localhost:5432/lyoral-distribution
+    username: postgres
+    password: 1234
+    driver-class-name: org.postgresql.Driver
+    hikari:
+      max-lifetime: 600_000
+      maximum-pool-size: 4
+#      如果某个线程没有释放连接，在获取连接 10000 毫秒后，系统会以WARN级别打印线程堆栈
+      leak-detection-threshold: 10_000
+
+
+logging:
+  level:
+    root: INFO
+    org.springframework.web: WARN
+    org.springframework.orm.jpa: ERROR
+    org.springframework.transaction: ERROR
+    com.howtodoinjava: ERROR
+    org.hibernate.SQL: ERROR
+    org.hibernate.type: ERROR
+    org.hibernate.type.descriptor.sql: ERROR
+    org.springframework.jdbc.core.JdbcTemplate: ERROR
+    org.springframework.jdbc.core.StatementCreatorUtils: ERROR
+    org.apache.kafka: WARN

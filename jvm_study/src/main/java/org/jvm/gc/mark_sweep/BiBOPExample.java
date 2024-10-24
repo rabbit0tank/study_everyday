@@ -17,8 +17,10 @@ class Block {
 }
 
 class BinnedBlockObjectPool {
-    private final int BLOCK_SIZE = 64; // 每个块的大小
-    private final int MAX_BUCKETS = 10; // 最大桶数
+    // 每个块的大小
+    private final int BLOCK_SIZE = 64;
+    // 最大桶数
+    private final int MAX_BUCKETS = 10;
     private List<LinkedList<Block>> freeLists;
 
     public BinnedBlockObjectPool() {
@@ -32,13 +34,14 @@ class BinnedBlockObjectPool {
     public void initialize(int numberOfBlocks) {
         for (int i = 0; i < numberOfBlocks; i++) {
             Block block = new Block(BLOCK_SIZE);
-            freeLists.get(0).add(block); // 所有块初始放在第一个桶
+            // 所有块初始放在第一个桶
+            freeLists.getFirst().add(block);
         }
     }
 
     // 分配块
     public Block allocate(int size) {
-        int bucketIndex = size / BLOCK_SIZE;
+        int bucketIndex = size / BLOCK_SIZE -1;
         if (bucketIndex >= MAX_BUCKETS) {
             throw new IllegalArgumentException("Requested size is too large.");
         }
@@ -57,10 +60,14 @@ class BinnedBlockObjectPool {
 
     // 释放块
     public void release(Block block) {
-        int bucketIndex = block.size / BLOCK_SIZE;
-        LinkedList<Block> freeList = freeLists.get(bucketIndex);
-        block.isFree = true;
-        freeList.add(block);
+        if(block!=null){
+            int bucketIndex = block.size / BLOCK_SIZE-1;
+            LinkedList<Block> freeList = freeLists.get(bucketIndex);
+            block.isFree = true;
+            freeList.add(block);
+        }
+        //为null，说明该实体已被回收
+
     }
 
     // 简单的内存状态显示
@@ -74,7 +81,8 @@ class BinnedBlockObjectPool {
 public class BiBOPExample {
     public static void main(String[] args) {
         BinnedBlockObjectPool pool = new BinnedBlockObjectPool();
-        pool.initialize(20); // 初始化 20 个内存块
+        // 初始化 20 个内存块
+        pool.initialize(20);
 
         System.out.println("Initial memory state:");
         pool.printMemoryState();
