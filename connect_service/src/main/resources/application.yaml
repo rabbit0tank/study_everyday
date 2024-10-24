@@ -12,6 +12,10 @@ spring:
       maximum-pool-size: 4
 #      如果某个线程没有释放连接，在获取连接 10000 毫秒后，系统会以WARN级别打印线程堆栈
       leak-detection-threshold: 10_000
+      # 默认值为3，代表最小空闲连接数
+      minimum-idle: 10
+      #空闲达到10s时直接关停
+      idle-timeout: 10_000
 
 
 logging:
