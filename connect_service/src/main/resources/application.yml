@@ -1,9 +1,22 @@
 spring:
   application:
-    name: lyoral-distribution
+    name: connect-service
+  profiles:
+    active: dev
+
+  jpa:
+    show-sql: true
+    open-in-view: true
+    hibernate:
+      ddl-auto: none
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQL94Dialect
+        format_sql: true
+
 
   datasource:
-    url: jdbc:postgresql://localhost:5432/lyoral-distribution
+    url: jdbc:postgresql://localhost:5432/connect-service
     username: postgres
     password: 1234
     driver-class-name: org.postgresql.Driver
@@ -17,7 +30,6 @@ spring:
       minimum-idle: 2
 #      如果某个线程没有释放连接，在获取连接 10000 毫秒后，系统会以WARN级别打印线程堆栈
       leak-detection-threshold: 10_000
-
       #空闲达到10s时直接关停
       idle-timeout: 10_000
 
