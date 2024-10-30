@@ -34,9 +34,9 @@
 
 ```java
 Cipher sc,cc,ac;
-sc=new SimpleCipher();
-cc=new ComplexCipher(sc);	
-ac=new AdvancedCipher(cc); 
+sc= new SimpleCipher();
+cc= new ComplexCipher(sc);	
+ac= new AdvancedCipher(cc); 
 
 ```
 
