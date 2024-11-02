@@ -1,4 +1,33 @@
 # JVM_STUDY
+## [2024.11.2]
+### 分代回收机制
+![generation.png](../../static/jvm/gc/generation.png)
+- 年轻代
+  - 该内存区域主要用于存放新创建的对象
+  - 年轻代又可进一步分成1个Eden Space和2个Suvivor Space（编号为0和1），默认将会按照 8:1:1 划分成 Eden 与两块 Survivor空间，
+  - 新生代每次 GC 之后都可以回收大批量对象，所以比较适合复制算法，只需要付出少量复制存活对象的成本
+  ![younger_generation_1.png](../../static/jvm/gc/younger_generation_1.png)
+  - 当对象在堆中被创建时，将进入年轻代的Eden Space
+  ![younger_generation_2.png](../../static/jvm/gc/younger_generation_2.png)
+  - 随着程序创建对象的增加，Eden空间会慢慢被填满
+  ![younger_generation_3.png](../../static/jvm/gc/younger_generation_3.png)
+  - 当 Eden 空间填满时，会触发轻微的垃圾收集,此时JVM会扫描Eden Space和Suvivor Space 1 ,对于仍然存活的对象，则复制到Suvivor Space 0中,同时幸存对象的年龄增加，Eden区和S1被清空
+  ![younger_generation_4.png](../../static/jvm/gc/younger_generation_4.png)
+  - 当 Eden 空间再次被填满时，会继续触发轻微的垃圾收集，此时Suvivor Space的0和1的角色互换，此时JVM会扫描Eden Space和Suvivor Space 0 ，对于仍然存活的对象，则复制到Suvivor Space 1中，同时幸存对象的年龄再次增加
+  ![younger_generation_5.png](../../static/jvm/gc/younger_generation_5.png)
+  - 如果其中一个Suvivor Space已满，或者在多次扫描Suvivor Space，某个对象仍然存活（某个对象的年龄超过年龄阈值），将其移动到Old Gen
+  ![younger_generation_6.png](../../static/jvm/gc/younger_generation_6.png)
+- 老年代
+  - 该内存区域主要存放JVM中生命周期较长的对象（经过几次的Young Gen的垃圾回收后仍然存在） 
+  - 该区域内存相对较大，垃圾回收也相对不频繁（譬如可能几个小时一次） 
+  - 老年代主要采用GC标记-压缩算法的方式来避免内存碎片（将存活对象移动到内存片的一边，也就是内存整理） 
+  - 老年代的垃圾回收也会触发STW（Stop the World） 
+  - 而且老年代回收速度会慢很多，所以，对于响应性的应用程序，应该尽量避免对老年代的垃圾回收
+- 永生代
+  - 该内存区域主要存放类定义、字节码和常量等很少会变更的信息
+  - 该内存区域是由JVM在运行时根据应用程序使用的类来填充的
+  - 此外，Java SE类库和方法也存储在这里
+  - 如果JVM发现某些类不再需要，并且其他类可能需要空间，则这些类可能会被回收。
 ## [2024.10.18]
 ### GC算法
 - 标记清除法
