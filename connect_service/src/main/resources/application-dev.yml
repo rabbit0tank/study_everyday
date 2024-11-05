@@ -1,3 +1,7 @@
 com:
   connect-service:
     env: dev
+spring:
+  jpa:
+    hibernate:
+      ddl-auto: update

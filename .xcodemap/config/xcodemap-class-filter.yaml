@@ -1,0 +1,14 @@
+autoDetectedPackages:
+- com.rabbit0tank.connect_service
+- com.rabbit0tank.mybatis_project
+- org.jvm.gc.dangling_reference
+- org.jvm.gc.mark_sweep
+- org.jvm.gc.memory_leak
+- org.jvm.gc.performance
+- org.jvm.gc.ref_count
+enableAutoDetect: true
+ignoreSameClassCall: null
+ignoreSamePackageCall: null
+includedPackagePrefixes: null
+includedParentClasses: null
+name: xcodemap-filter

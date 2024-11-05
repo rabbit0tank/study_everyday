@@ -1,0 +1,5 @@
+com\rabbit0tank\connect_service\web\dao\UserEntityRepository.class
+com\rabbit0tank\connect_service\Application.class
+com\rabbit0tank\connect_service\common\bean\JpaConfig.class
+com\rabbit0tank\connect_service\web\entity\UserEntity.class
+com\rabbit0tank\connect_service\common\model\BaseEntity.class
