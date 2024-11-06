@@ -35,7 +35,7 @@ class BinnedBlockObjectPool {
         for (int i = 0; i < numberOfBlocks; i++) {
             Block block = new Block(BLOCK_SIZE);
             // 所有块初始放在第一个桶
-            freeLists.getFirst().add(block);
+            freeLists.get(0).add(block);
         }
     }
 
